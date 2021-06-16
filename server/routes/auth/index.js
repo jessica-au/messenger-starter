@@ -1,6 +1,15 @@
+const express = require('express');
 const router = require("express").Router();
 const { User } = require("../../db/models");
 const jwt = require("jsonwebtoken");
+const cookieParser = require('cookie-parser');
+const { app } = require("../../app");
+const cors = require('cors');
+
+router.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+router.use(express.json());
+router.use(cookieParser());
+
 
 router.post("/register", async (req, res, next) => {
   try {
@@ -75,15 +84,20 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.delete("/logout", (req, res, next) => {
-  res.sendStatus(204);
+  res
+    .status(202)
+    .clearCookie('Name'.send("Cookies cleared"))
 });
 
 router.get("/user", (req, res, next) => {
-  if (req.user) {
-    return res.json(req.user);
-  } else {
-    return res.json({});
-  }
+  res
+    .status(202)
+    .cookie('Name', 'testCookie', {
+      sameSite: 'strict',
+      path: '/user',
+      expires: new Date(new Date().getTime() + 100 * 1000),
+      httpOnly: true,
+    }).send("Cookie being initialized")
 });
 
 module.exports = router;
