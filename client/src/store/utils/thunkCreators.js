@@ -8,11 +8,21 @@ import {
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
-axios.interceptors.request.use(async function (config) {
-  const token = await localStorage.getItem("messenger-token");
-  config.headers["x-access-token"] = token;
+axios.defaults.withCredentials = true;
 
+// This is where localStorage is being set up.  Need to take down from client-side and set up auth on server side with httpOnly cookies
+
+axios.interceptors.request.use(async function (config) {
+  // const token = await localStorage.getItem("messenger-token");
+  // config.headers["x-access-token"] = token;
+
+  config.withCredentials = true;
   return config;
+
+  // const token = () => { 
+  //   axios.get('http://localhost:3000', { withCredentials: true}).then((res) => {
+  //   console.log(res.data)
+  // })}
 });
 
 // USER THUNK CREATORS
@@ -35,7 +45,7 @@ export const fetchUser = () => async (dispatch) => {
 export const register = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/register", credentials);
-    await localStorage.setItem("messenger-token", data.token);
+    // await localStorage.setItem("messenger-token", data.token);
     dispatch(gotUser(data));
     socket.emit("go-online", data.id);
   } catch (error) {
@@ -47,7 +57,7 @@ export const register = (credentials) => async (dispatch) => {
 export const login = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/login", credentials);
-    await localStorage.setItem("messenger-token", data.token);
+    // await localStorage.setItem("messenger-token", data.token);
     dispatch(gotUser(data));
     socket.emit("go-online", data.id);
   } catch (error) {
@@ -59,7 +69,7 @@ export const login = (credentials) => async (dispatch) => {
 export const logout = (id) => async (dispatch) => {
   try {
     await axios.delete("/auth/logout");
-    await localStorage.removeItem("messenger-token");
+    // await localStorage.removeItem("messenger-token");
     dispatch(gotUser({}));
     socket.emit("logout", id);
   } catch (error) {
@@ -67,7 +77,7 @@ export const logout = (id) => async (dispatch) => {
   }
 };
 
-// CONVERSATIONS THUNK CREATORS
+//CONVERSATIONS THUNK CREATORS
 
 export const fetchConversations = () => async (dispatch) => {
   try {
