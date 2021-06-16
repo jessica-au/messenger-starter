@@ -23,6 +23,7 @@ app.set("port", port);
  * Create HTTP server.
  */
 
+//THIS is where I need to createServer and add httpOnly and other attributes
 const server = http.createServer(app);
 
 /**
