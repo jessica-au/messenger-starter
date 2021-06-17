@@ -8,21 +8,20 @@ import {
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
+const apiUrl = 'http://localhost:3001'
 axios.defaults.withCredentials = true;
-
-// This is where localStorage is being set up.  Need to take down from client-side and set up auth on server side with httpOnly cookies
 
 axios.interceptors.request.use(async function (config) {
   // const token = await localStorage.getItem("messenger-token");
   // config.headers["x-access-token"] = token;
 
-  config.withCredentials = true;
-  return config;
+  // config.withCredentials = true;
+  // return config;
 
-  // const token = () => { 
-  //   axios.get('http://localhost:3000', { withCredentials: true}).then((res) => {
-  //   console.log(res.data)
-  // })}
+  const getToken = async () => { 
+    await axios.get(apiUrl, { withCredentials: true });
+    setJwt(res.data.getToken)
+  }
 });
 
 // USER THUNK CREATORS
