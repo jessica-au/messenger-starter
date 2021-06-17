@@ -29,16 +29,31 @@ router.post("/register", async (req, res, next) => {
     }
 
     const user = await User.create(req.body);
+    // TODO potentially remove
+    // const token = jwt.sign(
+    //   { id: user.dataValues.id },
+    //   process.env.SESSION_SECRET,
+    //   { expiresIn: 86400 }
+    // );
 
-    const token = jwt.sign(
-      { id: user.dataValues.id },
-      process.env.SESSION_SECRET,
-      { expiresIn: 86400 }
-    );
-    res.json({
-      ...user.dataValues,
-      token,
-    });
+    const userData = {
+      id: user.id,
+      email: user.email,
+      photoUrl: user.photoUrl,
+      username: user.username
+    }
+
+    // req.user
+    //   .save()
+    //   .then
+
+    res
+      .cookie('JWT', 'testCookie', {
+        sameSite: 'strict',
+        expires: new Date(new Date().getTime() + 100 * 1000),
+        httpOnly: true,
+      })
+      .json(userData);
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
       return res.status(401).json({ error: "User already exists" });
@@ -68,15 +83,27 @@ router.post("/login", async (req, res, next) => {
       console.log({ error: "Wrong username and/or password" });
       res.status(401).json({ error: "Wrong username and/or password" });
     } else {
-      const token = jwt.sign(
-        { id: user.dataValues.id },
-        process.env.SESSION_SECRET,
-        { expiresIn: 86400 }
-      );
-      res.json({
-        ...user.dataValues,
-        token,
-      });
+      //TODO potentially remove
+      // const token = jwt.sign(
+      //   { id: user.dataValues.id },
+      //   process.env.SESSION_SECRET,
+      //   { expiresIn: 86400 }
+      // );
+
+      const userData = {
+        id: user.id,
+        email: user.email,
+        photoUrl: user.photoUrl,
+        username: user.username
+      }
+
+      res
+        .cookie('JWT', 'testCookie', {
+          sameSite: 'strict',
+          expires: new Date(new Date().getTime() + 100 * 1000),
+          httpOnly: true,
+        })
+        .json(userData);
     }
   } catch (error) {
     next(error);
@@ -90,14 +117,12 @@ router.delete("/logout", (req, res, next) => {
 });
 
 router.get("/user", (req, res, next) => {
-  res
-    .status(202)
-    .cookie('Name', 'testCookie', {
-      sameSite: 'strict',
-      path: '/user',
-      expires: new Date(new Date().getTime() + 100 * 1000),
-      httpOnly: true,
-    }).send("Cookie being initialized")
+  console.log(req.user)
+  if (req.user) {
+    return res.json(req.user);
+  } else {
+    return res.json({});
+  }
 });
 
 module.exports = router;
