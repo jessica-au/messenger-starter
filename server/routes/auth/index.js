@@ -11,6 +11,7 @@ router.use(express.json());
 router.use(cookieParser());
 
 
+
 router.post("/register", async (req, res, next) => {
   try {
     // expects {username, email, password} in req.body
@@ -30,11 +31,11 @@ router.post("/register", async (req, res, next) => {
 
     const user = await User.create(req.body);
     // TODO potentially remove
-    // const token = jwt.sign(
-    //   { id: user.dataValues.id },
-    //   process.env.SESSION_SECRET,
-    //   { expiresIn: 86400 }
-    // );
+    const token = jwt.sign(
+      { id: user.dataValues.id },
+      process.env.SESSION_SECRET,
+      { expiresIn: 86400 }
+    );
 
     const userData = {
       id: user.id,
@@ -43,17 +44,13 @@ router.post("/register", async (req, res, next) => {
       username: user.username
     }
 
-    // req.user
-    //   .save()
-    //   .then
-
     res
-      .cookie('JWT', 'testCookie', {
+      .cookie('token', token, {
         sameSite: 'strict',
         expires: new Date(new Date().getTime() + 100 * 1000),
         httpOnly: true,
       })
-      .json(userData);
+      .json(userData, token);
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
       return res.status(401).json({ error: "User already exists" });
@@ -84,11 +81,11 @@ router.post("/login", async (req, res, next) => {
       res.status(401).json({ error: "Wrong username and/or password" });
     } else {
       //TODO potentially remove
-      // const token = jwt.sign(
-      //   { id: user.dataValues.id },
-      //   process.env.SESSION_SECRET,
-      //   { expiresIn: 86400 }
-      // );
+      const token = jwt.sign(
+        { id: user.dataValues.id },
+        process.env.SESSION_SECRET,
+        { expiresIn: 86400 }
+      );
 
       const userData = {
         id: user.id,
@@ -98,12 +95,12 @@ router.post("/login", async (req, res, next) => {
       }
 
       res
-        .cookie('JWT', 'testCookie', {
-          sameSite: 'strict',
-          expires: new Date(new Date().getTime() + 100 * 1000),
-          httpOnly: true,
-        })
-        .json(userData);
+      .cookie('token', token, {
+        sameSite: 'strict',
+        expires: new Date(new Date().getTime() + 100 * 1000),
+        httpOnly: true,
+      })
+      .json(userData, token);
     }
   } catch (error) {
     next(error);
