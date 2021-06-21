@@ -44,6 +44,7 @@ const OtherUserBubble = (props) => {
         <Box className={classes.bubble}>
           <Typography className={classes.text}>{text}</Typography>
         </Box>
+      
       </Box>
     </Box>
   );

@@ -88,6 +88,7 @@ export const updateUnreadCountStore = (state, conversationId, status) => {
       const newConvo = { ...convo };
       newConvo.unreadCount = 0;
       newConvo.messages = newConvo.messages.map(message => {
+        // TODO need to rely on backend
         message.status = status
         return message
       })
