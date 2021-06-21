@@ -78,6 +78,10 @@ router.get("/", async (req, res, next) => {
         if (element.status === "unread"){
           numUnreadMessages += 1
         }
+        else if (element.status === "read") {
+          //assume everything above is read
+          numUnreadMessages = 0
+        }
       });
 
       convoJSON.unreadCount = numUnreadMessages
