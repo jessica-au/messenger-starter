@@ -7,6 +7,7 @@ import {
   setSearchedUsers,
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
+import cookieParser from "cookie-parser";
 
 axios.interceptors.request.use(async function (config) {
   const token = await localStorage.getItem("messenger-token");

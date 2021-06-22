@@ -30,8 +30,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 10,
-    // float: "right"
+    borderRadius: 10
   },
 }));
 
