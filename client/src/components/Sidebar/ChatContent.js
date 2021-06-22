@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
+    // float: "right"
   },
 }));
 
@@ -49,12 +50,12 @@ const ChatContent = (props) => {
         <Typography className={classes.previewText}>
           {latestMessageText}
         </Typography>
+      </Box>
         {unreadCount !== 0 ? <Typography className={classes.notification}>
 
           {unreadCount}
         </Typography>
         : null }
-      </Box>
     </Box>
   );
 };
