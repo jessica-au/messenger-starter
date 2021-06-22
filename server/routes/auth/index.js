@@ -2,13 +2,13 @@ const express = require('express');
 const router = require("express").Router();
 const { User } = require("../../db/models");
 const jwt = require("jsonwebtoken");
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const { app } = require("../../app");
 const cors = require('cors');
 
 router.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 router.use(express.json());
-router.use(cookieParser());
+// router.use(cookieParser());
 
 
 
