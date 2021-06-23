@@ -70,10 +70,8 @@ router.post("/login", async (req, res, next) => {
     });
 
     if (!user) {
-      console.log({ error: `No user found for username: ${username}` });
       res.status(401).json({ error: "Wrong username and/or password" });
     } else if (!user.correctPassword(password)) {
-      console.log({ error: "Wrong username and/or password" });
       res.status(401).json({ error: "Wrong username and/or password" });
     } else {
       const token = jwt.sign(
@@ -104,12 +102,11 @@ router.post("/login", async (req, res, next) => {
 
 router.delete("/logout", (req, res, next) => {
   res
-    .status(202)
+    .status(204)
     .clearCookie('Name'.send("Cookies cleared"))
 });
 
 router.get("/user", (req, res, next) => {
-  console.log(req.user)
   if (req.user) {
     return res.json(req.user);
   } else {

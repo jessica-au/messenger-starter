@@ -8,7 +8,6 @@ import {
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
-const apiUrl = 'http://localhost:3001'
 axios.defaults.withCredentials = true;
 
 // USER THUNK CREATORS
