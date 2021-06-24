@@ -43,19 +43,19 @@ router.put("/", async (req, res, next) => {
     if (!req.user) {
       return res.sendStatus(401);
     }
-    const { messageId, conversationId } = req.body;
+    const { conversationId } = req.body;
 
     let messages = await Message.findAll({
       where: {
         status: "unread",
         conversationId,
-        senderId: user.id
+        senderId: req.user.id
       }
     });
-
     messages.forEach((message) => {
-      message.updateAttributes({status: "read"});
+      message.update({status: "read"})
     })
+    res.json({ messages })
   } catch (error) {
     next(error)
   }

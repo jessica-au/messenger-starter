@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Box } from "@material-ui/core";
 import { BadgeAvatar, ChatContent } from "../Sidebar";
 import { withStyles } from "@material-ui/core/styles";
-import { setActiveChat} from "../../store/activeConversation";
-import { updateUnreadCount } from "../../store/conversations";
+import { setActiveChat } from "../../store/activeConversation";
+import { updateMessageStatus } from "../../store/utils/thunkCreators";
 import { connect } from "react-redux";
+
 
 const styles = {
   root: {
@@ -23,10 +24,8 @@ const styles = {
 class Chat extends Component {
   handleClick = async (conversation) => {
     await this.props.setActiveChat(conversation.otherUser.username);
-    await this.props.updateUnreadCount(conversation.id, "read")
+    await this.props.updateMessageStatus(conversation.id);
   };
-  //handleClick should also handle read count
-
 
   render() {
     const { classes } = this.props;
@@ -53,8 +52,8 @@ const mapDispatchToProps = (dispatch) => {
     setActiveChat: (id) => {
       dispatch(setActiveChat(id));
     },
-    updateUnreadCount: (id, status) => {
-      dispatch(updateUnreadCount(id, status));
+    updateMessageStatus: (conversationId) => {
+      dispatch(updateMessageStatus({ conversationId }));
     }
   };
 };
