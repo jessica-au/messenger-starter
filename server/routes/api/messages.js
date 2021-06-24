@@ -9,7 +9,7 @@ router.post("/", async (req, res, next) => {
       return res.sendStatus(401);
     }
     const senderId = req.user.id;
-    const { recipientId, text, conversationId, sender } = req.body;
+    const { recipientId, text, sender } = req.body;
 
     // if we don't have conversation id, find a conversation to make sure it doesn't already exist
     let conversation = await Conversation.findConversation(
@@ -37,5 +37,29 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
+
+router.put("/", async (req, res, next) => {
+  try {
+    if (!req.user) {
+      return res.sendStatus(401);
+    }
+    const { messageId, conversationId } = req.body;
+
+    let messages = await Message.findAll({
+      where: {
+        status: "unread",
+        conversationId,
+        senderId: user.id
+      }
+    });
+
+    messages.forEach((message) => {
+      message.updateAttributes({status: "read"});
+    })
+  } catch (error) {
+    next(error)
+  }
+});
+
 
 module.exports = router;
