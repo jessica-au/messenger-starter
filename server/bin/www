@@ -23,7 +23,6 @@ app.set("port", port);
  * Create HTTP server.
  */
 
-//THIS is where I need to createServer and add httpOnly and other attributes
 const server = http.createServer(app);
 
 /**
@@ -31,6 +30,11 @@ const server = http.createServer(app);
  */
 
 const io = require("socket.io")(server);
+
+io.use(function(socket, next){
+  console.log(socket.handshake.auth.token)
+  next();
+});
 
 io.on("connection", (socket) => {
   socket.on("go-online", (id) => {
@@ -42,9 +46,11 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new-message", (data) => {
+    //TODO implement logic for 'rooms' according ot socket documentation
     socket.broadcast.emit("new-message", {
       message: data.message,
       sender: data.sender,
+      // TODO write logic to ensure new message created is sent only to the recipient
     });
   });
 
