@@ -1,5 +1,6 @@
 {
-  "dependencies": {
-    "pg": "^8.6.0"
+  "devDependencies": {
+    "pg": "^8.6.0",
+    "redux-devtools-extension": "^2.13.9"
   }
 }

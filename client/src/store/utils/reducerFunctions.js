@@ -81,3 +81,20 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
+
+export const updateUnreadCountStore = (state, conversationId, status) => {
+  return state.map((convo) => {
+    if (conversationId === convo.id) {
+      const newConvo = { ...convo };
+      newConvo.unreadCount = 0;
+      newConvo.messages = newConvo.messages.map(message => {
+        // TODO need to rely on backend
+        message.status = status
+        return message
+      })
+      return newConvo;
+    } else {
+      return convo
+    }
+  })
+}

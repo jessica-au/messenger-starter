@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 10,
+    borderRadius: 10
   },
 }));
 
@@ -38,7 +38,7 @@ const ChatContent = (props) => {
   const classes = useStyles();
 
   const { conversation } = props;
-  const { latestMessageText, otherUser } = conversation;
+  const { latestMessageText, otherUser, unreadCount } = conversation;
 
   return (
     <Box className={classes.root}>
@@ -50,6 +50,11 @@ const ChatContent = (props) => {
           {latestMessageText}
         </Typography>
       </Box>
+        {unreadCount !== 0 ? <Typography className={classes.notification}>
+
+          {unreadCount}
+        </Typography>
+        : null }
     </Box>
   );
 };

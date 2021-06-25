@@ -7,6 +7,7 @@ import {
   setSearchedUsers,
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
+import {updateUnreadCount} from "./../conversations";
 
 axios.defaults.withCredentials = true;
 
@@ -74,6 +75,12 @@ const saveMessage = async (body) => {
   const { data } = await axios.post("/api/messages", body);
   return data;
 };
+
+export const updateMessageStatus = (body) => async(dispatch) => {
+  const { data } = await axios.put("/api/messages", body);
+  dispatch(updateUnreadCount(body.conversationId, "read"))
+  return data;
+}
 
 const sendMessage = (data, body) => {
   socket.emit("new-message", {
