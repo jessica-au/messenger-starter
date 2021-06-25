@@ -11,8 +11,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { register } from "./store/utils/thunkCreators";
-import { makeStyles, withTheme } from "@material-ui/core/styles";
-
+import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
 import {loginSignupStyles as useStyles} from "./themes/theme"
 
 
@@ -46,7 +45,8 @@ const Login = (props) => {
        <Box className={classes.bgContainer}>
         <Box className={classes.image}>
           <div className={classes.textWrapper}>
-            <h2 className={classes.text}>Converse with anyone with any language </h2> 
+            <h2 className={classes.text}>
+            <SmsOutlinedIcon fontSize="large" /> <br></br>Converse with anyone with any language </h2> 
           </div>
           <img class={classes.image} src="https://res.cloudinary.com/dc5yjx4v5/image/upload/v1624581061/bg-img_ouep5g.png"></img>
 

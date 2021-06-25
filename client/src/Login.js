@@ -10,8 +10,10 @@ import {
   TextField,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
-import { makeStyles } from "@material-ui/core/styles";
-import { loginSignupStyles as useStyles } from "./themes/theme"
+import { loginSignupStyles as useStyles } from "./themes/theme";
+import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
+;
+
 
 const Login = (props) => {
   const history = useHistory();
@@ -35,7 +37,8 @@ const Login = (props) => {
       <Box className={classes.bgContainer}>
         <Box className={classes.image}>
           <div className={classes.textWrapper}>
-            <h2 className={classes.text}>Converse with anyone with any language </h2>
+          <h2 className={classes.text}>
+            <SmsOutlinedIcon fontSize="large" /> <br></br>Converse with anyone with any language </h2> 
           </div>
           <img class={classes.image} src="https://res.cloudinary.com/dc5yjx4v5/image/upload/v1624581061/bg-img_ouep5g.png"></img>
 

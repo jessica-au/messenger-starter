@@ -3,7 +3,7 @@ import { createMuiTheme, makeStyles } from "@material-ui/core";
 export const theme = createMuiTheme({
   typography: {
     fontFamily: "Open Sans, sans-serif",
-    fontSize: 14,
+    fontSize: 11,
     button: {
       textTransform: "none",
       letterSpacing: 0,
