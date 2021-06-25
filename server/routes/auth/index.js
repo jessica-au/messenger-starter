@@ -88,7 +88,7 @@ router.post("/login", async (req, res, next) => {
       }
 
       res
-      .cookie('token', token, {
+      .cookie("token", token, {
         sameSite: 'strict',
         expires: new Date(new Date().getTime() + 100 * 1000),
         httpOnly: true,
@@ -103,7 +103,8 @@ router.post("/login", async (req, res, next) => {
 router.delete("/logout", (req, res, next) => {
   res
     .status(204)
-    .clearCookie('token')
+    .clearCookie("token")
+    next();
 });
 
 router.get("/user", (req, res, next) => {
