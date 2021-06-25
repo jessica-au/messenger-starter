@@ -5,13 +5,15 @@ import moment from "moment";
 
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;
-  let lastReadByOtherUserIndex = 0
 
-  messages.forEach((message, index) => {
-    if (message.status === "read" && message.senderId === userId) {
-      lastReadByOtherUserIndex = index
-    }
-  })
+  let lastReadByOtherUserIndex = () => {
+
+    messages.reverse().forEach((message, index) => {
+      if (message.status === "read" && message.senderId === userId) {
+        return index
+      }
+    })
+  }
 
   return (
     <Box>
