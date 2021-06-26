@@ -1,22 +1,24 @@
 import React, { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Grid,
   Box,
-  Typography,
+
   Button,
   FormControl,
   TextField,
   FormHelperText,
 } from "@material-ui/core";
 import { register } from "./store/utils/thunkCreators";
-import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
-import {loginSignupStyles as useStyles} from "./themes/theme"
+
+import { loginSignupStyles as useStyles } from "./themes/theme";
+import NavHeader from "./components/NavHeader"
+import Hero from "./components/Hero"
 
 
 const Login = (props) => {
-  const history = useHistory();
+
   const classes = useStyles();
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
@@ -42,28 +44,16 @@ const Login = (props) => {
 
   return (
     <Grid container justify="left">
-       <Box className={classes.bgContainer}>
-        <Box className={classes.image}>
-          <div className={classes.textWrapper}>
-            <h2 className={classes.text}>
-            <SmsOutlinedIcon fontSize="large" /> <br></br>Converse with anyone with any language </h2> 
-          </div>
-          <img class={classes.image} src="https://res.cloudinary.com/dc5yjx4v5/image/upload/v1624581061/bg-img_ouep5g.png"></img>
-
-          
-        </Box>
-      </Box>
-      <Box className={classes.login} mx="auto">
-        <Grid container item>
-          <Typography className={classes.login}>Already have an account?</Typography>
-          <Button className={classes.createaccount} onClick={() => history.push("/login")}>Login</Button>
-        </Grid>
+      <Hero />
+      <Box className={classes.loginContainer}>
+        <NavHeader />
         <form onSubmit={handleRegister}>
           <Grid>
             <Box className={classes.welcome}><h2>Create an account.</h2></Box>
             <Grid>
               <FormControl fullWidth required>
-              Username
+              <br></br><br></br>
+                Username <br></br>
                 <TextField
                   aria-label="username"
                   name="username"
@@ -74,7 +64,8 @@ const Login = (props) => {
             </Grid>
             <Grid>
               <FormControl fullWidth required>
-                E-mail address
+              <br></br> <br></br>
+                E-mail address <br></br>
                 <TextField
                   aria-label="e-mail address"
                   type="email"
@@ -85,7 +76,8 @@ const Login = (props) => {
             </Grid>
             <Grid>
               <FormControl error={!!formErrorMessage.confirmPassword} fullWidth required>
-                Password
+              <br></br><br></br>
+                Password<br></br>
                 <TextField
                   aria-label="password"
                   type="password"
@@ -98,7 +90,7 @@ const Login = (props) => {
                 </FormHelperText>
               </FormControl>
             </Grid>
-            <Button type="submit" variant="contained" size="large" disableElevation color="primary" className={classes.signin}>
+            <Button type="submit" variant="contained" size="large" disableElevation color="primary" className={classes.signinButton}>
               Create
             </Button>
           </Grid>

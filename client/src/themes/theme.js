@@ -1,9 +1,10 @@
 import { createMuiTheme, makeStyles } from "@material-ui/core";
 
+
 export const theme = createMuiTheme({
   typography: {
     fontFamily: "Open Sans, sans-serif",
-    fontSize: 11,
+    fontSize: 12,
     button: {
       textTransform: "none",
       letterSpacing: 0,
@@ -24,6 +25,7 @@ export const theme = createMuiTheme({
 });
 
 export const loginSignupStyles = makeStyles(()=>({
+ 
   textWrapper: {
     background: 'linear-gradient(#3A8DFF 15%, #86B9FF 85%)',
     height: 700,
@@ -34,8 +36,9 @@ export const loginSignupStyles = makeStyles(()=>({
   text: {
     marginTop: "60%",
     textAlign: "center",
-    width: 250,
-    paddingLeft: 75,
+    width: 350,
+    paddingLeft: 30,
+    fontWeight: "normal",
   },
   image: {
     // background: 'linear-gradient(#3A8DFF 15%, #86B9FF 85%)',
@@ -44,21 +47,36 @@ export const loginSignupStyles = makeStyles(()=>({
     width: 425,
     color: "white",
   },
-  login: {
+  loginContainer: {
     color: "grey",
-    padding: '20px 10px 10px 10px'
+    padding: '20px 10px 10px 10px',
+    width: 375,
+    margin: "0px 0px 0px 100px"
+  },
+  loginPrompt: {
+    alignItems: "center",
+    height: "100%",
+    display: "flex",
   },
   welcome: {
     color: "black"
   },
-  createaccount: {
-    margin: 10,
-    padding: '10px 40px 10px 40px',
+  createaccountButton: {
+    marginLeft: "60px",
+    padding: '15px 40px 15px 40px',
     boxShadow: '0px 2px 10px 2px lightgrey',
     fontStyle: 'bold',
     color: '#3A8DFF'
   },
-  signin: {
-    margin: '50px'
-  }
+  makeaccountText: {
+    marginRight: 40,
+  },
+  signinButton: {
+    margin: '50px 100px',
+    padding: '15px 60px 15px 60px',
+    fontWeight: 'bold',
+  },
+  // form: {
+  //   justifyContent: "center",
+  // }
 }))
