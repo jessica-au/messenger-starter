@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import {
   Grid,
   Box,
-
   Button,
   FormControl,
   TextField,
@@ -43,7 +42,8 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="left">
+    <Grid container justify="flex-start">
+
       <Hero />
       <Box className={classes.loginContainer}>
         <NavHeader />
@@ -52,9 +52,10 @@ const Login = (props) => {
             <Box className={classes.welcome}><h2>Create an account.</h2></Box>
             <Grid>
               <FormControl fullWidth required>
-              <br></br><br></br>
-                Username <br></br>
+                <br /><br />
+                <label for="username">Username</label> <br />
                 <TextField
+                  id="username"
                   aria-label="username"
                   name="username"
                   type="text"
@@ -64,9 +65,10 @@ const Login = (props) => {
             </Grid>
             <Grid>
               <FormControl fullWidth required>
-              <br></br> <br></br>
-                E-mail address <br></br>
+                <br /><br />
+                <label for="email">E-mail address </label><br />
                 <TextField
+                  id="email"
                   aria-label="e-mail address"
                   type="email"
                   name="email"
@@ -76,9 +78,10 @@ const Login = (props) => {
             </Grid>
             <Grid>
               <FormControl error={!!formErrorMessage.confirmPassword} fullWidth required>
-              <br></br><br></br>
-                Password<br></br>
+                <br /><br />
+                <label for="password">Password</label><br />
                 <TextField
+                  id="password"
                   aria-label="password"
                   type="password"
                   inputProps={{ minLength: 6 }}

@@ -62,7 +62,7 @@ export const loginSignupStyles = makeStyles(()=>({
     color: "black"
   },
   createaccountButton: {
-    marginLeft: "60px",
+    marginLeft: "20px",
     padding: '15px 40px 15px 40px',
     boxShadow: '0px 2px 10px 2px lightgrey',
     fontStyle: 'bold',

@@ -34,7 +34,7 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="left">
+    <Grid container justify="space-start">
       <Hero />
       <Box className={classes.loginContainer}> 
         <NavHeader/>
@@ -45,9 +45,10 @@ const Login = (props) => {
             </Box>
             <Grid>
               <FormControl fullWidth required>
-                <br></br><br></br>
-                E-mail address <br></br>
+                <br/><br/>
+                <label for="username">E-mail address</label> <br/>
                 <TextField
+                  id="username"
                   aria-label="username"
                   name="username"
                   type="text"
@@ -55,9 +56,10 @@ const Login = (props) => {
               </FormControl>
             </Grid>
             <FormControl fullWidth required>
-              <br></br> <br></br>
-              Password <br></br>
+              <br/> <br/>
+              <label for="password">Password</label> <br/>
               <TextField
+                id="password"
                 aria-label="password"
                 type="password"
                 name="password"

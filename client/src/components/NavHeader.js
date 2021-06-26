@@ -11,24 +11,26 @@ import { loginSignupStyles as useStyles } from "../themes/theme";
 
 
 const NavHeader = () => {
-    const history = useHistory();
-    const classes = useStyles();
+  const history = useHistory();
+  const classes = useStyles();
 
-    const routeDirection = history.location.pathname === "/register" ? "/login": "/register"
-    const ctaText = history.location.pathname === "/register" ? "Login" : "Create account" 
-    const ctaDetail = history.location.pathname === "/register" ? "Already have an account?" : "Dont have an account?"
-    return (
-        <Grid container item alignItems="center">
-          <Box className={classes.makeaccountlink}>
-            <Typography>
-              {ctaDetail}
-            </Typography>
-          </Box>
-          <Box>
-            <Button className={classes.createaccountButton} onClick={() => history.push(routeDirection)}>{ctaText}</Button>
-          </Box>
-        </Grid>
-    )
+  const routeDirection = history.location.pathname === "/register" ? "/login" : "/register"
+  const ctaText = history.location.pathname === "/register" ? "Login" : "Create account"
+  const ctaDetail = history.location.pathname === "/register" ? "Already have an account?" : "Dont have an account?"
+  return (
+
+      <Grid container item alignItems="center" justify="flex-start" >
+        <Box className={classes.makeaccountlink}>
+          <Typography>
+            {ctaDetail}
+          </Typography>
+        </Box>
+        <Box>
+          <Button className={classes.createaccountButton} onClick={() => history.push(routeDirection)}>{ctaText}</Button>
+        </Box>
+      </Grid>
+
+  )
 }
 
 export default NavHeader

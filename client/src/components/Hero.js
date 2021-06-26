@@ -1,8 +1,6 @@
 import React from "react";
 import { Box } from "@material-ui/core";
 import { loginSignupStyles as useStyles } from "../themes/theme";
-import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
-
 
 const Hero = () => {
     const classes = useStyles();
@@ -12,12 +10,12 @@ const Hero = () => {
             <Box className={classes.image}>
                 <div className={classes.textWrapper}>
                     <h1 className={classes.text}>
-                        <SmsOutlinedIcon fontSize="large" />
+                    <i class="far fa-comment-dots" style={{fontSize: "70px", marginBottom: 20}}/>
                         <br></br>
                         Converse with anyone with any language
                     </h1>
                 </div>
-                <img class={classes.image} alt="logo"
+                <img className={classes.image} alt="logo"
                     src="https://res.cloudinary.com/dc5yjx4v5/image/upload/v1624581061/bg-img_ouep5g.png">
                 </img>
             </Box>
