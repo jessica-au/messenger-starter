@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "pg": "^8.6.0"
   }
 }
