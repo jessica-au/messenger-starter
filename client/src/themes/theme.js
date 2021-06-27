@@ -31,7 +31,7 @@ export const loginSignupStyles = makeStyles(()=>({
     height: 700,
     width: 425,
     position: "absolute",
-    opacity: "0.85"
+    opacity: "0.85",
   },
   text: {
     marginTop: "60%",
@@ -40,18 +40,23 @@ export const loginSignupStyles = makeStyles(()=>({
     paddingLeft: 30,
     fontWeight: "normal",
   },
-  image: {
-    // background: 'linear-gradient(#3A8DFF 15%, #86B9FF 85%)',
-  },
   bgContainer: {
     width: 425,
     color: "white",
+    [theme.breakpoints.down('xs', 'sm', 'md', 'lg')]: {
+      display: "none"
+    },
   },
   loginContainer: {
     color: "grey",
     padding: '20px 10px 10px 10px',
     width: 375,
-    margin: "0px 0px 0px 100px"
+    margin: "0px 0px 0px 100px",
+    [theme.breakpoints.down('xs', 'sm', 'md')]: {
+      width: 310,
+      backgroundColor: "white",
+      margin: "0px 0px 0px 20px"
+    },
   },
   loginPrompt: {
     alignItems: "center",
@@ -76,7 +81,5 @@ export const loginSignupStyles = makeStyles(()=>({
     padding: '15px 60px 15px 60px',
     fontWeight: 'bold',
   },
-  // form: {
-  //   justifyContent: "center",
-  // }
+  
 }))
