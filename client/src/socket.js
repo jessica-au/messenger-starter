@@ -7,9 +7,7 @@ import {
 } from "./store/conversations";
 
 const socket = io(window.location.origin, {
-  auth: {
-    token: "token",
-  }
+  withCredentials: true,
 });
 
 socket.on("connect", () => {

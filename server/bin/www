@@ -10,6 +10,8 @@ require("dotenv").config();
 const { app, sessionStore } = require("../app");
 const http = require("http");
 const db = require("../db");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 const onlineUsers = require("../onlineUsers");
 
 /**
@@ -29,11 +31,10 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces, and sync database.
  */
 
-const io = require("socket.io")(server);
-
-io.use(function(socket, next){
-  console.log(socket.handshake.auth.token)
-  next();
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000"
+  }
 });
 
 io.on("connection", (socket) => {
@@ -49,7 +50,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new-message", (data) => {
-    //TODO implement logic for 'rooms' according ot socket documentation
     socket.to(data.recipientId).emit("new-message", {
       message: data.message,
       sender: data.sender,
