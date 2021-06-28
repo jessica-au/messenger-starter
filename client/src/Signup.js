@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Grid,
   Box,
-  Typography,
   Button,
   FormControl,
   TextField,
@@ -12,8 +11,14 @@ import {
 } from "@material-ui/core";
 import { register } from "./store/utils/thunkCreators";
 
+import { loginSignupStyles as useStyles } from "./themes/theme";
+import NavHeader from "./components/NavHeader"
+import Hero from "./components/Hero"
+
+
 const Login = (props) => {
-  const history = useHistory();
+
+  const classes = useStyles();
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
 
@@ -37,19 +42,21 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to log in?</Typography>
-          <Button onClick={() => history.push("/login")}>Login</Button>
-        </Grid>
+    <Grid container justify="flex-start">
+
+      <Hero />
+      <Box className={classes.loginContainer}>
+        <NavHeader />
         <form onSubmit={handleRegister}>
           <Grid>
+            <Box className={classes.welcome}><h2>Create an account.</h2></Box>
             <Grid>
-              <FormControl>
+              <FormControl fullWidth required>
+                <br /><br />
+                <label for="username">Username</label> <br />
                 <TextField
+                  id="username"
                   aria-label="username"
-                  label="Username"
                   name="username"
                   type="text"
                   required
@@ -57,9 +64,11 @@ const Login = (props) => {
               </FormControl>
             </Grid>
             <Grid>
-              <FormControl>
+              <FormControl fullWidth required>
+                <br /><br />
+                <label for="email">E-mail address </label><br />
                 <TextField
-                  label="E-mail address"
+                  id="email"
                   aria-label="e-mail address"
                   type="email"
                   name="email"
@@ -68,10 +77,12 @@ const Login = (props) => {
               </FormControl>
             </Grid>
             <Grid>
-              <FormControl error={!!formErrorMessage.confirmPassword}>
+              <FormControl error={!!formErrorMessage.confirmPassword} fullWidth required>
+                <br /><br />
+                <label for="password">Password</label><br />
                 <TextField
+                  id="password"
                   aria-label="password"
-                  label="Password"
                   type="password"
                   inputProps={{ minLength: 6 }}
                   name="password"
@@ -82,22 +93,7 @@ const Login = (props) => {
                 </FormHelperText>
               </FormControl>
             </Grid>
-            <Grid>
-              <FormControl error={!!formErrorMessage.confirmPassword}>
-                <TextField
-                  label="Confirm Password"
-                  aria-label="confirm password"
-                  type="password"
-                  inputProps={{ minLength: 6 }}
-                  name="confirmPassword"
-                  required
-                />
-                <FormHelperText>
-                  {formErrorMessage.confirmPassword}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-            <Button type="submit" variant="contained" size="large">
+            <Button type="submit" variant="contained" size="large" disableElevation color="primary" className={classes.signinButton}>
               Create
             </Button>
           </Grid>
