@@ -9,6 +9,8 @@ const SidebarContainer = (props) => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  
+
   const handleChange = async (event) => {
     if (event.target.value === "") {
       // clear searched convos from redux store
